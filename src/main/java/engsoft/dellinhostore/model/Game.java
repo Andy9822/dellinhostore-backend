@@ -2,46 +2,51 @@ package engsoft.dellinhostore.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Game {
 	
 	@Id
-	@Column (name="game_id")
+	@Column (name = "game_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private String name;
-	private int minimumAge;
-	private String genre;
-	
 
-	public Game() {	
-	}
+	@Column (unique = true)
+	private String name;
+
+	@Column
+	private int minimumAge;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "genre_id")
+	private Genre genre;
+
 	
-	public Game(String name, int minAge, String genre) {
-		super();
+	public Game(String name, int minAge, Genre genre) {
 		setName(name);
 		setMinimumAge(minAge);
 		setGenre(genre);
+	}
+	
+	public Game() {
+		
 	}
 	
 	public long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
-
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
+	private void setName(String name) {
 		this.name = name;
 	}
 
@@ -49,15 +54,15 @@ public class Game {
 		return minimumAge;
 	}
 
-	public void setMinimumAge(int minimumAge) {
+	private void setMinimumAge(int minimumAge) {
 		this.minimumAge = minimumAge;
 	}
 
-	public String getGenre() {
+	public Genre getGenre() {
 		return genre;
 	}
 
-	public void setGenre(String genre) {
+	private void setGenre(Genre genre) {
 		this.genre = genre;
 	}
 

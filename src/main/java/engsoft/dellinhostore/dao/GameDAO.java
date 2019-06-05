@@ -1,5 +1,6 @@
 package engsoft.dellinhostore.dao;
 
+import java.util.List;
 
 import javax.persistence.TypedQuery;
 
@@ -54,6 +55,15 @@ public class GameDAO {
 		tx.commit();
 		session.close();
 		return game;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Game> getGameList() {
+		Session session = this.sessionFactory.openSession();
+		TypedQuery<Game> query = session.createQuery("FROM Game");
+		List<Game> gameList = query.getResultList();
+		session.close();
+		return gameList;
 	}
 
 }
