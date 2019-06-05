@@ -1,25 +1,39 @@
 package engsoft.dellinhostore.model;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import engsoft.dellinhostore.abstraction.Offer;
+@Entity
 public class Trade extends Offer{
 	
+	public Trade(Client advertiseruser, Client offererUser,Game game, String description) {
+		super(advertiseruser, offererUser, description);
+		// Auto-generated constructor stuba
+	}
+
+	public Trade() {
+		super();
+	}
+
 	@Id
-	@Column (name = "approvedTransaction_id")
+	@Column
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@Column
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "game_id")
-	private long tradedGame;
+	private Game tradedGame;
 	
 	@Column(nullable = true)
-	private float rating;
+	@JoinColumn(name = "rating_id")
+	private long rating;
 	
 	@Column(nullable = true)
 	private String review;
