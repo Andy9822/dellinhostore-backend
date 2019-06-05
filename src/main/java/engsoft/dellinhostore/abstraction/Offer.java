@@ -1,29 +1,46 @@
 package engsoft.dellinhostore.abstraction;
 import javax.persistence.Column;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
 
+import engsoft.dellinhostore.model.Client;
 
+@MappedSuperclass
 public abstract class Offer {
 	
-	@Column
-	@JoinColumn(name = "client_id")
-	private long advertiseruser;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "advertiser_id")
+	private Client advertiser;
 	
-	@Column
-	@JoinColumn(name = "client_id")
-	private long offererUser;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "offerer_id")
+	private Client offerer;
 	
 	@Column
 	private String description;
 	
-	public long getAdvertiseruser() {
-		return advertiseruser;
+	
+	public Offer(Client advertiseruser, Client offererUser, String description) {
+		super();
+		this.advertiser = advertiseruser;
+		this.offerer= offererUser;
+		this.description = description;
 	}
 	
-	public long getOffererUser() {
-		return offererUser;
+	public Offer() {
+		
 	}
 	
+	public Client getAdvertiser() {
+		return advertiser;
+	}
+
+	public Client getOfferer() {
+		return offerer;
+	}
+
 	public String getDescription() {
 		return description;
 	}
