@@ -16,14 +16,21 @@
 		<!-- IMPORTANTE -->
 		<!-- colocar o hbm2dll.auto como 'create' ao rodar pela primeira vez -->
 		<!-- alterar para 'none' depois que o servidor foi criado pela primeira vez   -->
-		<property name="hbm2ddl.auto">create</property>
+		<property name="hbm2ddl.auto">none</property>
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
         <property name="hibernate.jdbc.lob.non_contextual_creation">true</property>
         <property name="connection_pool_size">1</property>
        
 		<!-- Adicionar aqui os models criados -->
+		<mapping class="engsoft.dellinhostore.model.Genre"/>
+		<mapping class="engsoft.dellinhostore.model.Platform"/>
 		<mapping class="engsoft.dellinhostore.model.Game"/>
+		<mapping class="engsoft.dellinhostore.model.Client"/>
+		<mapping class="engsoft.dellinhostore.model.Advert"/>
+		<mapping class="engsoft.dellinhostore.model.Admin"/>
+		<mapping class="engsoft.dellinhostore.model.Negotiation"/>
+		<mapping class="engsoft.dellinhostore.model.Trade"/>
 		
     </session-factory>
 </hibernate-configuration>
