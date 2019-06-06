@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import engsoft.dellinhostore.dao.GameDAO;
 import engsoft.dellinhostore.enums.AdvertStatus;
 
 @Entity
@@ -42,9 +41,8 @@ public class Advert {
 	@Column
 	private String description;
 	
-	public Advert(long advertisedGame_id, Client advertiser, String description, Platform platform) {
-		GameDAO gDao = new GameDAO();
-		setAdvertisedGame(gDao.getById(advertisedGame_id));
+	public Advert(Game game, Client advertiser, String description, Platform platform) {
+		setAdvertisedGame(game);
 		setAdvertiser(advertiser);
 		setDescription(description);
 		setPlatform(platform);

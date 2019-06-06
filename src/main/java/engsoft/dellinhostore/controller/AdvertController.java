@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import engsoft.dellinhostore.util.ReturnMessage;
 import engsoft.dellinhostore.dao.AdvertDAO;
 import engsoft.dellinhostore.dao.ClientDAO;
+import engsoft.dellinhostore.dao.GameDAO;
 import engsoft.dellinhostore.dao.PlatformDAO;
 import engsoft.dellinhostore.model.Advert;
 import engsoft.dellinhostore.model.Client;
@@ -24,20 +25,43 @@ public class AdvertController {
 	private AdvertDAO aDao = new AdvertDAO();
 	
 	@RequestMapping("/insert")
-	public Advert insert(
+	public ReturnMessage insert(
 			@RequestParam(value = "game_id") long game_id,
 			@RequestParam(value = "advertiser_id") long advertiser_id,
 			@RequestParam(value = "platform_id") long platform_id,
 			@RequestParam(value = "description") String description) {
-		ClientDAO cDao = new ClientDAO();
-		Client client  = cDao.getById(advertiser_id);
-		PlatformDAO pDao = new PlatformDAO();
-		Platform platform  = pDao.getById(platform_id);
-		Advert advert = new Advert(game_id, client, description,platform);
-		aDao.save(advert);
-		return advert;
+		//Se os ids recebidos corresponderem a elementos existentes cria o advert
+		if (validInsertIds(game_id, advertiser_id, platform_id)) {
+			ClientDAO cDao = new ClientDAO();
+			Client client  = cDao.getById(advertiser_id);
+			GameDAO gDao = new GameDAO();
+			Game game = gDao.getById(game_id);
+			PlatformDAO pDao = new PlatformDAO();
+			Platform platform  = pDao.getById(platform_id);
+			Advert advert = new Advert(game, client, description,platform);
+			aDao.save(advert);
+			return new ReturnMessage(true, advert);
+		} else {
+
+			return new ReturnMessage(false, "Invalid Id received");
+		}
+		
 	}
 	
+	private boolean validInsertIds(long game_id,long advertiser_id,long platform_id) {
+		ClientDAO cDao = new ClientDAO();
+		Client client  = cDao.getById(advertiser_id);
+		GameDAO gDao = new  GameDAO();
+		Game game = gDao.getById(game_id);
+		PlatformDAO pDao = new PlatformDAO();
+		Platform platform  = pDao.getById(platform_id);
+		if (client != null && game != null && platform != null) {
+			return true;
+		}
+		else {
+			return false;	
+		}
+	}
 	@RequestMapping("/list")
 	public List<Advert> getOpenAdvertList() {
 		List <Advert> advertList = aDao.getOpenAdvertList();

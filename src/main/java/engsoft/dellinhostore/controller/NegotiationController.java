@@ -23,19 +23,22 @@ import engsoft.dellinhostore.util.ReturnMessage;
 public class NegotiationController {
 
 	private NegotiationDAO nDao = new NegotiationDAO();
-	private AdvertDAO aDao = new AdvertDAO();
-	private ClientDAO cDao = new ClientDAO();
-
 	@RequestMapping("/insert")
-	public Negotiation insert(
+	public ReturnMessage insert(
 			@RequestParam(value = "advert_id") long advert_id,
 			@RequestParam(value = "offerer_id") long offerer_id,
 			@RequestParam(value = "description") String description) {
-		Advert advert = aDao.getById(advert_id);
-		Client offerer = cDao.getById(offerer_id);
-		Negotiation negotiation = new Negotiation(advert, offerer, description);
-		nDao.save(negotiation);
-		return negotiation;
+		if (validInsertIds(advert_id,offerer_id)){
+			AdvertDAO aDao = new AdvertDAO();
+			ClientDAO cDao = new ClientDAO();
+			Advert advert = aDao.getById(advert_id);
+			Client offerer = cDao.getById(offerer_id);
+			Negotiation negotiation = new Negotiation(advert, offerer, description);
+			nDao.save(negotiation);
+			return new ReturnMessage(true,negotiation);
+		} else {
+			return new ReturnMessage(false, "Invalid Ids");
+		}
 	}
 
 	@RequestMapping("/delete")
@@ -96,5 +99,19 @@ public class NegotiationController {
 		List <Negotiation> negotiationList = nDao.getNegotiationList();
 		return negotiationList;
 	}
+	
+
+	private boolean validInsertIds(long advert_id, long offerer_id) {
+		AdvertDAO aDao = new AdvertDAO();
+		ClientDAO cDao = new ClientDAO();
+		Advert advert = aDao.getById(advert_id);
+		Client offerer = cDao.getById(offerer_id);
+		if (advert != null && offerer != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 
 }

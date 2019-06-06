@@ -11,6 +11,7 @@ import engsoft.dellinhostore.dao.GameDAO;
 import engsoft.dellinhostore.dao.GenreDAO;
 import engsoft.dellinhostore.model.Game;
 import engsoft.dellinhostore.model.Genre;
+import engsoft.dellinhostore.util.ReturnMessage;
 
 
 @CrossOrigin
@@ -21,16 +22,22 @@ public class GameController {
 	private GameDAO gDao = new GameDAO();
 
 	@RequestMapping("/insert")
-	public Game insert(
+	public ReturnMessage insert(
 			@RequestParam(value = "name") String name,
 			@RequestParam(value = "minAge", defaultValue = "1") int minAge,
 			@RequestParam(value = "genre_id") long genre_id){
 		
 		GenreDAO genreDao = new GenreDAO();
 		Genre genre  = genreDao.getById(genre_id);
-		Game game = new Game(name, minAge, genre);
-		gDao.save(game);
-		return game;
+		//Teste if genre exists
+		if (genre != null) {
+			Game game = new Game(name, minAge, genre);
+			gDao.save(game);
+			return new ReturnMessage(true, game);
+		} else {
+			return new ReturnMessage(false,"Invalid genre_id");
+		}
+		
 	}
 	
 	@RequestMapping("/list")
