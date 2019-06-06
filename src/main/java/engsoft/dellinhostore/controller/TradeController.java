@@ -33,7 +33,8 @@ public class TradeController {
 	}
 	
 	@RequestMapping("/listByAdvertiserId")
-	public List<Trade> getTradeListByAdvertiserId(@RequestParam(value = "advert_Id") long advertiser_id) {
+	public List<Trade> getTradeListByAdvertiserId(
+			@RequestParam(value = "advert_Id") long advertiser_id) {
 		List <Trade> tradeList = tDao.getTradeList();
 		return tradeList;
 	}

@@ -15,7 +15,7 @@ public class Trade extends Offer{
 	
 	public Trade(Client advertiseruser, Client offererUser,Game game, String description) {
 		super(advertiseruser, offererUser, description);
-		// Auto-generated constructor stuba
+		setTradedGame(game);
 	}
 
 	public Trade() {
@@ -38,5 +38,12 @@ public class Trade extends Offer{
 	@Column(nullable = true)
 	private String review;
 
+	public Game getTradedGame() {
+		return tradedGame;
+	}
+
+	public void setTradedGame(Game tradedGame) {
+		this.tradedGame = tradedGame;
+	}
 
 }
