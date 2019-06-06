@@ -51,15 +51,16 @@ public class NegotiationController {
 	}
 
 	@RequestMapping("/accept")
-	public ReturnMessage update(
+	public ReturnMessage accept(
 			@RequestParam(value = "negotiation_id") long negotiation_id) {
 		Negotiation negotiation = nDao.getById(negotiation_id);
 		//We have to check if the advert_id received exists
 		if (negotiation != null) {
 			//We only accept if the transaction was properly waiting for an answer
 			if (negotiation.getStatus() == TransactionStatus.WAITING_ANSWER) {
-				long advert_id = negotiation.getAdvert().getId();
-				closeAdvertAndNegotiations(advert_id);
+				negotiation.acceptTransaction();
+				nDao.update(negotiation);
+				closeAdvertAndNegotiations(negotiation.getAdvert().getId());
 				createTrade(negotiation);
 				return new ReturnMessage(true, "Trade processed!");
 			} else {
@@ -75,17 +76,18 @@ public class NegotiationController {
 		TradeController trController = new TradeController();
 		Client advertiser = negotiation.getAdvertiser();
 		Client offerer = negotiation.getOfferer();
-		String description = negotiation.getDescription();
+		String offer = negotiation.getOffer();
 		Game game = negotiation.getAdvert().getAdvertisedGame();
-		trController.create(advertiser, offerer, game, description);
+		trController.create(advertiser, offerer, game, offer);
 
 	}
-
+	
+	//We have to delete all negotiations for first because they have a reference to the advert and we need to guarantee integrity of the DB
 	private void closeAdvertAndNegotiations(long advert_id) {
-		//We have to delete all negotiations for first because they have a reference to the advert and we need to guarantee integrity of the DB
-		nDao.deleteNegotiationsByAdvertId(advert_id);
+		//nDao.deleteNegotiationsByAdvertId(advert_id);
+		nDao.closeNegotiationsByAdvertId(advert_id);
 		AdvertController adController = new AdvertController();
-		adController.delete(advert_id);
+		adController.closeById(advert_id);
 
 	}
 	

@@ -2,6 +2,8 @@ package engsoft.dellinhostore.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import engsoft.dellinhostore.dao.GameDAO;
+import engsoft.dellinhostore.enums.AdvertStatus;
 
 @Entity
 public class Advert {
@@ -28,11 +31,15 @@ public class Advert {
 	@JoinColumn(name = "platform_id")
 	private Platform platform;
 	
+	@Column (name = "status")
+	@Enumerated(EnumType.ORDINAL)
+	private AdvertStatus transactionStatus;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "client_id")
 	private Client advertiser;
 	
+	@Column
 	private String description;
 	
 	public Advert(long advertisedGame_id, Client advertiser, String description, Platform platform) {
@@ -41,8 +48,14 @@ public class Advert {
 		setAdvertiser(advertiser);
 		setDescription(description);
 		setPlatform(platform);
+		setStatus(AdvertStatus.OPEN);
 	}
 	
+	private void setStatus(AdvertStatus status) {
+		this.transactionStatus = status;
+		
+	}
+
 	public Advert() {
 		
 	}
@@ -78,6 +91,19 @@ public class Advert {
 	private void setPlatform(Platform platform) {
 		this.platform = platform;
 	}
+	
+	public AdvertStatus getStatus() {
+		return transactionStatus;
+	}
 
+	public void close() {
+		this.transactionStatus = AdvertStatus.CLOSED;
+	}
+
+	public Platform getPlatform() {
+		return platform;
+	}
+	
+	
 	
 }

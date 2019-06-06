@@ -2,5 +2,5 @@ package engsoft.dellinhostore.enums;
 
 public enum TransactionStatus {
 	
-	WAITING_ANSWER, DECLINED, FINISHED, CANCELED
+	WAITING_ANSWER, DECLINED, ACCEPTED, CLOSED
 }

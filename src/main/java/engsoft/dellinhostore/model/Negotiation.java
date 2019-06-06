@@ -26,14 +26,14 @@ public class Negotiation extends Offer {
 	@JoinColumn(name = "advert_id")
 	private Advert advert;
 	
-	@Column
+	@Column (name = "status")
 	@Enumerated(EnumType.ORDINAL)
-	private TransactionStatus status;
+	private TransactionStatus transactionStatus;
 
 	public Negotiation(Advert advert,Client offerer, String description) {
 		super(advert.getAdvertiser(), offerer, description);
 		this.advert = advert;
-		this.status = TransactionStatus.WAITING_ANSWER;
+		this.transactionStatus = TransactionStatus.WAITING_ANSWER;
 	}
 	
 	public Negotiation() {
@@ -41,11 +41,11 @@ public class Negotiation extends Offer {
 	}
 	
 	public TransactionStatus getStatus() {
-		return status;
+		return transactionStatus;
 	}
 
 	public void setStatus(TransactionStatus status) {
-		this.status = status;
+		this.transactionStatus = status;
 	}
 
 	public long getId() {
@@ -54,6 +54,15 @@ public class Negotiation extends Offer {
 	
 	public Advert getAdvert() {
 		return advert;
+	}
+
+	public void close() {
+		this.transactionStatus = TransactionStatus.CLOSED;
+		
+	}
+
+	public void acceptTransaction() {
+		setStatus(TransactionStatus.ACCEPTED);	
 	}
 	
 	

@@ -18,15 +18,15 @@ public abstract class Offer {
 	@JoinColumn(name = "offerer_id")
 	private Client offerer;
 	
-	@Column
-	private String description;
+	@Column (name = "offer")
+	private String offer;
 	
 	
-	public Offer(Client advertiseruser, Client offererUser, String description) {
+	public Offer(Client advertiseruser, Client offererUser, String offer) {
 		super();
 		this.advertiser = advertiseruser;
 		this.offerer= offererUser;
-		this.description = description;
+		this.offer = offer;
 	}
 	
 	public Offer() {
@@ -41,12 +41,12 @@ public abstract class Offer {
 		return offerer;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getOffer() {
+		return offer;
 	}
 	
-	public void setDescription(String offer) {
-		this.description = offer;
+	public void setOffer(String offer) {
+		this.offer = offer;
 	}
 
 

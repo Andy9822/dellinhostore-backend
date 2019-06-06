@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import engsoft.dellinhostore.enums.AdvertStatus;
 import engsoft.dellinhostore.model.Advert;
 import engsoft.dellinhostore.util.HibernateUtil;
 
@@ -56,9 +57,19 @@ public class AdvertDAO {
 		session.close();
 		return advert;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Advert> getOpenAdvertList() {
+		Session session = this.sessionFactory.openSession();
+		TypedQuery<Advert> query = session.createQuery("FROM Advert WHERE status =:status");
+		query.setParameter("status", AdvertStatus.OPEN.ordinal());
+		List<Advert> advertList = query.getResultList();
+		session.close();
+		return advertList;
+	}
 
 	@SuppressWarnings("unchecked")
-	public List<Advert> getAdvertList() {
+	public List<Advert> getEntireList() {
 		Session session = this.sessionFactory.openSession();
 		TypedQuery<Advert> query = session.createQuery("FROM Advert");
 		List<Advert> advertList = query.getResultList();
