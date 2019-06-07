@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import engsoft.dellinhostore.model.Admin;
+import engsoft.dellinhostore.model.Manager;
 import engsoft.dellinhostore.model.Client;
 import engsoft.dellinhostore.util.LoginReturnMessage;
 import engsoft.dellinhostore.util.ReturnMessage;
-import engsoft.dellinhostore.dao.AdminDAO;
+import engsoft.dellinhostore.dao.ManagerDAO;
 import engsoft.dellinhostore.dao.ClientDAO;
 
 @CrossOrigin
@@ -22,7 +22,7 @@ import engsoft.dellinhostore.dao.ClientDAO;
 public class ClientController {
 
 	ClientDAO cDao = new ClientDAO();
-	AdminDAO aDao = new AdminDAO();
+	ManagerDAO mDao = new ManagerDAO();
 
 	@RequestMapping("/insert")
 	public Client insert(
@@ -47,12 +47,12 @@ public class ClientController {
 		//Testa se senha está correta
 		if (client.comparePassword(password) == false)
 			return new ReturnMessage(false, "Wrong password");
-		// Se email e senha sao corretos precisa verificar se usuario é simples cliente ou é admin
+		// Se email e senha sao corretos precisa verificar se usuario é simples cliente ou é manager
 		else {
-			Admin admin = aDao.getById(client.getId());
-			//Caso tenha achado admin com esse id de cliente é pq é admin
-			if (admin != null)
-				return new LoginReturnMessage(true, true, admin);
+			Manager manager = mDao.getById(client.getId());
+			//Caso tenha achado manager com esse id de cliente é pq é manager
+			if (manager != null)
+				return new LoginReturnMessage(true, true, manager);
 			else 
 				//Senao é mero cliente
 				return new LoginReturnMessage(true, false, client);
