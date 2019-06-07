@@ -2,6 +2,7 @@ package engsoft.dellinhostore.controller;
 
 import engsoft.dellinhostore.model.Client;
 import engsoft.dellinhostore.model.Game;
+import engsoft.dellinhostore.model.Rating;
 import engsoft.dellinhostore.model.Trade;
 
 import java.util.List;
@@ -21,7 +22,10 @@ public class TradeController {
 	private TradeDAO tDao = new TradeDAO();
 	
 	protected Trade create(Client advertiser, Client offerer, Game game, String description) {
-		Trade trade =  new Trade(advertiser,offerer,game,description);
+		RatingController ratController = new RatingController();
+		Rating rating = new Rating();
+		rating = ratController.create();
+		Trade trade =  new Trade(advertiser,offerer,game,description,rating);
 		tDao.save(trade);
 		return trade;
 	}
