@@ -19,7 +19,7 @@ public class HibernateUtil {
 			return metadata.getSessionFactoryBuilder().build();
 		} catch (Throwable ex) {
 			// Make sure you log the exception, as it might be swallowed
-			System.err.println("Initial SessionFactory creation failed." + ex);
+			System.err.println("\nInitial SessionFactory creation failed.\n" + ex + "\n");
 			throw new ExceptionInInitializerError(ex);
 		}
 	}
