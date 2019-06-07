@@ -28,9 +28,11 @@
 		<mapping class="engsoft.dellinhostore.model.Game"/>
 		<mapping class="engsoft.dellinhostore.model.Client"/>
 		<mapping class="engsoft.dellinhostore.model.Advert"/>
-		<mapping class="engsoft.dellinhostore.model.Admin"/>
+		<mapping class="engsoft.dellinhostore.model.Manager"/>
 		<mapping class="engsoft.dellinhostore.model.Negotiation"/>
 		<mapping class="engsoft.dellinhostore.model.Trade"/>
+		<mapping class="engsoft.dellinhostore.model.Rating"/>
+		<mapping class="engsoft.dellinhostore.model.Dispute"/>
 		
     </session-factory>
 </hibernate-configuration>
