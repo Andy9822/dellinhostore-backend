@@ -59,10 +59,15 @@ private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
 	@SuppressWarnings("unchecked")
 	public Client getByEmail(String email) {
+		Client client;
 		Session session = this.sessionFactory.openSession();
 		TypedQuery<Client> query = session.createQuery("FROM Client WHERE email = :email");
 		query.setParameter("email", email);
-		Client client  = query.getSingleResult();
+		try {
+			client  = query.getSingleResult();
+		} catch (Exception e) {
+			client = null;
+		}
 		return client;
 	}
 }

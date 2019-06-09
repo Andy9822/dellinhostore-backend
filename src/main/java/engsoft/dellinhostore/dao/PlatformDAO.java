@@ -57,5 +57,19 @@ public class PlatformDAO {
 		session.close();
 		return result;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public Platform getByName(String name) {
+		Platform platform;
+		Session session = this.sessionFactory.openSession();
+		TypedQuery<Platform> query = session.createQuery("FROM Platform WHERE name = :name");
+		query.setParameter("name", name);
+		try {
+			platform  = query.getSingleResult();
+		} catch (Exception e) {
+			platform = null;
+		}
+		return platform;
+	}
 
 }

@@ -48,12 +48,17 @@ public class GameDAO {
 		return game;
 	}
 	
-	public Game getById(String name) {
+	@SuppressWarnings("unchecked")
+	public Game getByName(String name) {
+		Game game;
 		Session session = this.sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
-		Game game = (Game) session.get(Game.class, name);
-		tx.commit();
-		session.close();
+		TypedQuery<Game> query = session.createQuery("FROM Game WHERE name = :name");
+		query.setParameter("name", name);
+		try {
+			game  = query.getSingleResult();
+		} catch (Exception e) {
+			game = null;
+		}
 		return game;
 	}
 	

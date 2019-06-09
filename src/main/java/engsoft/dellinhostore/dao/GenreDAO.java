@@ -57,4 +57,18 @@ public class GenreDAO {
 		return result;
 	}
 
+	@SuppressWarnings("unchecked")
+	public Genre getByName(String name) {
+		Genre genre;
+		Session session = this.sessionFactory.openSession();
+		TypedQuery<Genre> query = session.createQuery("FROM Genre WHERE name = :name");
+		query.setParameter("name", name);
+		try {
+			genre  = query.getSingleResult();
+		} catch (Exception e) {
+			genre = null;
+		}
+		return genre;
+	}
+
 }
