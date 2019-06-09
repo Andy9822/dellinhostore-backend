@@ -24,7 +24,7 @@ import engsoft.dellinhostore.controller.PlatformController;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes=Application.class)
 @AutoConfigureMockMvc
-public class AdvertControllerTests {
+public class AdvertControllerTest {
 	
     @Autowired
     private MockMvc mockMvc;

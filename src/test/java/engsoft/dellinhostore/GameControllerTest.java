@@ -22,7 +22,7 @@ import engsoft.dellinhostore.controller.GenreController;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes=Application.class)
 @AutoConfigureMockMvc
-public class GameControllerTests {
+public class GameControllerTest {
 	
     @Autowired
     private MockMvc mockMvc;
