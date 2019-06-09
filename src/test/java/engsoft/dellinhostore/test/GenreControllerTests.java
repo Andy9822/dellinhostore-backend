@@ -1,11 +1,11 @@
 package engsoft.dellinhostore.test;
 
-import static org.junit.Assert.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,36 +24,28 @@ public class GenreControllerTests {
 	
     @Autowired
     private MockMvc mockMvc;
-    @Autowired
-    private GenreController cat; 
-    
-    //Tests if all controllers are not null
-    @Test
-    public void sanityCheck() throws Exception{
-    	assertNotNull(cat);
-    }
     
     @Test
     public void insertTest() throws Exception {
         this.mockMvc.perform(post("/genre")
-        		.param("name", "MMORPG-test"))
+        		.param("name", "Genre AdvertController Test"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.success").value(true))
-                .andExpect(jsonPath("$.message.name").value("MMORPG-test"));
+                .andExpect(jsonPath("$.message.name").value("Genre AdvertController Test"));
     }
       
     @Test
     public void insertWithAdditionalParametersTest() throws Exception {
         this.mockMvc.perform(post("/genre")
-        		.param("name", "MMOTPS-test")
+        		.param("name", "Genre AdvertController Test")
         		.param("foo", "foo"))
         		.andExpect(status().isOk())
         		.andExpect(jsonPath("$.success").value(true))
-                .andExpect(jsonPath("$.message.name").value("MMOTPS-test"));
+                .andExpect(jsonPath("$.message.name").value("Genre AdvertController Test"));
     }
     
     @Test
-    public void insertWithEmptyNameTest() throws Exception {
+    public void insertWithEmptyParameterTest() throws Exception {
         this.mockMvc.perform(post("/genre")
         		.param("name", ""))
         		.andExpect(status().isOk())
@@ -62,10 +54,22 @@ public class GenreControllerTests {
     }
     
     @Test
+    public void insertWithMissingParameterTest() throws Exception {
+        this.mockMvc.perform(post("/genre"))
+        		.andExpect(status().is4xxClientError());
+    }
+    
+    @Test
     public void getAllTest() throws Exception {
         this.mockMvc.perform(get("/genre"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.message").isArray());
+                .andExpect(jsonPath("$.message").isArray())
+                .andExpect(jsonPath("$.message[0].name").isString());
+    }
+    
+    @After 
+    public void deleteTestedEntities() {
+        GenreController.deleteTestedGenre("Genre AdvertController Test");
     }
    
 }
