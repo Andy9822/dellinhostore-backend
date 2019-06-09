@@ -23,6 +23,14 @@ public class GenreDAO {
 		session.close();
 	}
 	
+	public void delete(Genre genre) {
+		Session session = this.sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		session.delete(genre);
+		tx.commit();
+		session.close();
+	}
+	
 	public Genre getById(long id) {
 		Session session = this.sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();

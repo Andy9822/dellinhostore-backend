@@ -40,6 +40,15 @@ public class PlatformDAO {
 		session.close();
 	}
 	
+	public void delete(Platform platform) {
+		Session session = this.sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		session.delete(platform);
+		tx.commit();
+		session.close();
+	}
+
+	
 	@SuppressWarnings("unchecked")
 	public List<Platform> getAll() {
 		Session session = this.sessionFactory.openSession();
