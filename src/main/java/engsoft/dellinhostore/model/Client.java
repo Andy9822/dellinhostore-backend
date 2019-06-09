@@ -27,8 +27,8 @@ public class Client {
 	@Column
 	private String name;
 	
-	@Column (unique = true)
-	private String CPF;
+	@Column (name = "cpf",unique = true)
+	private String cpf;
 	
 	@Column
 	@Temporal(TemporalType.DATE)
@@ -47,11 +47,11 @@ public class Client {
 	private String password;
 	
 	//Methods 
-	public Client(String name, String CPF, Date dateOfBirth, String email, String password) {
+	public Client(String name, String cpf, Date dateOfBirth, String email, String password) {
 		super();
 		this.name = name;
 		this.dateOfBirth = dateOfBirth;
-		this.CPF = CPF;
+		this.cpf = cpf;
 		this.email = email;
 		this.password = password;
 		this.rating = 0;
@@ -119,12 +119,12 @@ public class Client {
 		this.numNegotiations = negotiations;
 	}
 
-	public String getCPF() {
-		return CPF;
+	public String getcpf() {
+		return cpf;
 	}
 
-	public void setCPF(String CPF) {
-		this.CPF = CPF;
+	public void setcpf(String cpf) {
+		this.cpf = cpf;
 	}
 	
 	public long getId() {

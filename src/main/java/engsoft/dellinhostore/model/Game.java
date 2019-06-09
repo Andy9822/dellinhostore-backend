@@ -17,7 +17,7 @@ public class Game {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@Column (unique = true)
+	@Column //TODO SET UNIQUE
 	private String name;
 
 	@Column

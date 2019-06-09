@@ -76,5 +76,19 @@ public class AdvertDAO {
 		session.close();
 		return advertList;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public Advert getByDescription(String description) {
+		Advert advert;
+		Session session = this.sessionFactory.openSession();
+		TypedQuery<Advert> query = session.createQuery("FROM Advert WHERE description = :description");
+		query.setParameter("description", description);
+		try {
+			advert  = query.getSingleResult();
+		} catch (Exception e) {
+			advert = null;
+		}
+		return advert;
+	}
 
 }

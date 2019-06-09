@@ -45,7 +45,7 @@ public class AdvertController {
 			return new ReturnMessage(true, advert);
 		} else {
 
-			return new ReturnMessage(false, "Invalid Id received" + " "+ game_id + " "+ advertiser_id + " " + platform_id);
+			return new ReturnMessage(false, "Invalid parameters");
 		}
 		
 	}
