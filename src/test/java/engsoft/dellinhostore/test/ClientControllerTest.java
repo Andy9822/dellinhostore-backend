@@ -1,4 +1,4 @@
-package engsoft.dellinhostore;
+package engsoft.dellinhostore.test;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
