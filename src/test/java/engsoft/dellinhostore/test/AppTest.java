@@ -1,4 +1,4 @@
-package engsoft.dellinhostore;
+package engsoft.dellinhostore.test;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
