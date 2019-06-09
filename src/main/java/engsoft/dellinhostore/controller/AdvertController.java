@@ -3,6 +3,8 @@ package engsoft.dellinhostore.controller;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,14 +26,14 @@ public class AdvertController {
 
 	private AdvertDAO aDao = new AdvertDAO();
 	
-	@RequestMapping("/insert")
+	@PostMapping
 	public ReturnMessage insert(
 			@RequestParam(value = "game_id") long game_id,
 			@RequestParam(value = "advertiser_id") long advertiser_id,
 			@RequestParam(value = "platform_id") long platform_id,
 			@RequestParam(value = "description") String description) {
 		//Se os ids recebidos corresponderem a elementos existentes cria o advert
-		if (validInsertIds(game_id, advertiser_id, platform_id)) {
+		if (validInsertIds(game_id, advertiser_id, platform_id,description)) {
 			ClientDAO cDao = new ClientDAO();
 			Client client  = cDao.getById(advertiser_id);
 			GameDAO gDao = new GameDAO();
@@ -43,35 +45,35 @@ public class AdvertController {
 			return new ReturnMessage(true, advert);
 		} else {
 
-			return new ReturnMessage(false, "Invalid Id received");
+			return new ReturnMessage(false, "Invalid Id received" + " "+ game_id + " "+ advertiser_id + " " + platform_id);
 		}
 		
 	}
 	
-	private boolean validInsertIds(long game_id,long advertiser_id,long platform_id) {
+	private boolean validInsertIds(long game_id,long advertiser_id,long platform_id,String description) {
 		ClientDAO cDao = new ClientDAO();
 		Client client  = cDao.getById(advertiser_id);
 		GameDAO gDao = new  GameDAO();
 		Game game = gDao.getById(game_id);
 		PlatformDAO pDao = new PlatformDAO();
 		Platform platform  = pDao.getById(platform_id);
-		if (client != null && game != null && platform != null) {
+		if (client != null && game != null && platform != null && !description.trim().equals("")) {
 			return true;
 		}
 		else {
 			return false;	
 		}
 	}
-	@RequestMapping("/list")
-	public List<Advert> getOpenAdvertList() {
+	@GetMapping
+	public ReturnMessage getOpenAdvertList() {
 		List <Advert> advertList = aDao.getOpenAdvertList();
-		return advertList; 
+		return new ReturnMessage(true,advertList); 
 	}
 	
-	@RequestMapping("/listAll")
-	public List<Advert> getEntireList() {
+	@GetMapping("/open")
+	public ReturnMessage getEntireList() {
 		List <Advert> advertList = aDao.getEntireList();
-		return advertList; 
+		return new ReturnMessage(true,advertList); 
 	}
 	
 	
@@ -104,7 +106,13 @@ public class AdvertController {
 		Advert advert = aDao.getById(advert_id);
 		advert.close();
 		aDao.update(advert);
-		
-		
+	}
+	
+	static public void deleteTestedAdvert(String description) {
+		AdvertDAO aDao = new AdvertDAO();
+		Advert advert = aDao.getByDescription(description);
+		if (advert != null) {
+			aDao.delete(advert);
+		}
 	}
 }
