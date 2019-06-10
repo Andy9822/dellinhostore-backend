@@ -1,5 +1,5 @@
 language: java
 script:
-  - mvn test -B -X
+  - mvn test -B
 jdk:
   - oraclejdk8
