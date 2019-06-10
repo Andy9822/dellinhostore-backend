@@ -1,0 +1,39 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+		
+		<!-- Configurações do POSTGRESQL -->
+       <!-- Configurações do POSTGRESQL -->
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL95Dialect</property>
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/dellinho</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">oi</property>
+        
+		<!-- Configurações do HIBERNATE -->
+		<!-- IMPORTANTE -->
+		<!-- colocar o hbm2dll.auto como 'create' ao rodar pela primeira vez -->
+		<!-- alterar para 'none' depois que o servidor foi criado pela primeira vez   -->
+		<property name="hbm2ddl.auto">none</property>
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
+        <property name="hibernate.jdbc.lob.non_contextual_creation">true</property>
+        <property name="connection_pool_size">1</property>
+       
+		<!-- Adicionar aqui os models criados -->
+		<mapping class="engsoft.dellinhostore.model.Genre"/>
+		<mapping class="engsoft.dellinhostore.model.Platform"/>
+		<mapping class="engsoft.dellinhostore.model.Game"/>
+		<mapping class="engsoft.dellinhostore.model.Client"/>
+		<mapping class="engsoft.dellinhostore.model.Advert"/>
+		<mapping class="engsoft.dellinhostore.model.Manager"/>
+		<mapping class="engsoft.dellinhostore.model.Negotiation"/>
+		<mapping class="engsoft.dellinhostore.model.Trade"/>
+		<mapping class="engsoft.dellinhostore.model.Rating"/>
+		<mapping class="engsoft.dellinhostore.model.Dispute"/>
+		
+    </session-factory>
+</hibernate-configuration>
