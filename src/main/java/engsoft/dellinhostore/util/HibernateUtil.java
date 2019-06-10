@@ -13,17 +13,22 @@ public class HibernateUtil {
 			// Creates the Configuration from hibernate.cfg.xml properties and settings
 			 Configuration hibernateConfig = new Configuration().configure("hibernate.cfg.xml");
 			 
-			 // Set manually some properties from environment variables (suchs as DB username, password, url)
+			 // Set sensitive informations from environment variables such as DB username, password, url
 			 hibernateConfig.setProperty("hibernate.connection.url",System.getenv("DATABASE_CUSTOM_URL"));
 			 hibernateConfig.setProperty("hibernate.connection.username",System.getenv("DATABASE_USERNAME"));
 			 hibernateConfig.setProperty("hibernate.connection.password",System.getenv("DATABASE_PASSWORD"));
+			 
+			 //Set properties for Heroku's connection
+			 hibernateConfig.setProperty("hibernate.connection.ssl","true");
+			 hibernateConfig.setProperty("hibernate.connection.sslfactory","org.postgresql.ssl.NonValidatingFactory");
 			  
 			 //Builds SessionFactory
 			 return hibernateConfig.buildSessionFactory();
 			
 		} catch (Throwable ex) {
 			// Make sure you log the exception, as it might be swallowed
-			System.err.println("\nInitial SessionFactory creation failed.\n" + ex + "\n");
+			System.err.println("\nInitial SessionFactory creation failed.\n\nErro:" + ex + "\nFim erro\n\n\n");
+			System.err.println("\nInitial SessionFactory creation failed.\nError:" + ex + "\nError End\n\n");
 			throw new ExceptionInInitializerError(ex);
 		}
 	}
