@@ -1,4 +1,4 @@
-package engsoft.dellinhostore;
+package engsoft.dellinhostore.test;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -14,11 +14,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import engsoft.dellinhostore.application.Application;
+import engsoft.dellinhostore.application.App;
 import engsoft.dellinhostore.controller.GenreController;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes=Application.class)
+@SpringBootTest(classes=App.class)
 @AutoConfigureMockMvc
 public class GenreControllerTest {
 	
