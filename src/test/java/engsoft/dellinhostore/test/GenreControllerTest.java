@@ -19,7 +19,7 @@ import engsoft.dellinhostore.application.App;
 import engsoft.dellinhostore.controller.GenreController;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes=App.class)
+@SpringBootTest
 @AutoConfigureMockMvc
 @DisplayName("GenreControllerTest")
 public class GenreControllerTest {
