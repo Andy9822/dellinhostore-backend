@@ -13,7 +13,6 @@ public class HibernateUtil {
 			// Creates the Configuration from hibernate.cfg.xml properties and settings
 			 Configuration hibernateConfig = new Configuration().configure("hibernate.cfg.xml");
 			 
-			 // Set manually some properties from environment variables (suchs as DB username, password, url)
 			 // Set sensitive informations from environment variables such as DB username, password, url
 			 hibernateConfig.setProperty("hibernate.connection.url",System.getenv("DATABASE_CUSTOM_URL"));
 			 hibernateConfig.setProperty("hibernate.connection.username",System.getenv("DATABASE_USERNAME"));
