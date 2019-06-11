@@ -17,7 +17,7 @@
 		<!-- IMPORTANTE -->
 		<!-- colocar o hbm2dll.auto como 'create' ao rodar pela primeira vez -->
 		<!-- alterar para 'none' depois que o servidor foi criado pela primeira vez   -->
-		<property name="hbm2ddl.auto">none</property>
+		<property name="hbm2ddl.auto">update</property>
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
         <property name="hibernate.jdbc.lob.non_contextual_creation">true</property>
