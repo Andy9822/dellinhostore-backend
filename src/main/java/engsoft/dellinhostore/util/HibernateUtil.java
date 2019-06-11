@@ -15,6 +15,7 @@ public class HibernateUtil {
 			 
 			 // Set sensitive informations from environment variables such as DB username, password, url
 			 hibernateConfig.setProperty("hibernate.connection.url",System.getenv("DATABASE_CUSTOM_URL"));
+			 hibernateConfig.setProperty("hibernate.connection.url","jdbc:" + System.getenv("DATABASE_CUSTOM_URL"));
 			 hibernateConfig.setProperty("hibernate.connection.username",System.getenv("DATABASE_USERNAME"));
 			 hibernateConfig.setProperty("hibernate.connection.password",System.getenv("DATABASE_PASSWORD"));
 			 
