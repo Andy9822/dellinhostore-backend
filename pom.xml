@@ -81,7 +81,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-                <mainClass>engsoft.dellinhostore.application.Application</mainClass>
+                <mainClass>engsoft.dellinhostore.application.App</mainClass>
             </configuration>
 			</plugin>
 			<plugin>
