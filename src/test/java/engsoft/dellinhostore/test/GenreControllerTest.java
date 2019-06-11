@@ -62,6 +62,9 @@ public class GenreControllerTest {
     
     @Test
     public void getAllTest() throws Exception {
+    	this.mockMvc.perform(post("/genre")
+        		.param("name", "Genre AdvertController Test"))
+                .andExpect(status().isOk());
         this.mockMvc.perform(get("/genre"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.message").isArray())
