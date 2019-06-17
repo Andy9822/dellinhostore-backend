@@ -9,6 +9,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table (name = "rating")
 public class Rating {
@@ -35,6 +37,7 @@ public class Rating {
 	@Column (name = "offererReview", nullable = true)
 	private String offererReview;
 
+	@JsonIgnore
 	@OneToOne (mappedBy = "rating")
 	private Trade trade; 
 	

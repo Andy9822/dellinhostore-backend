@@ -1,6 +1,5 @@
 package engsoft.dellinhostore.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -27,7 +26,7 @@ public class Trade extends Offer{
 	@JoinColumn(name = "game_id")
 	private Game tradedGame;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "rating_id")
 	private Rating rating;
 
@@ -57,6 +56,10 @@ public class Trade extends Offer{
 
 	public void setRating(Rating rating) {
 		this.rating = rating;
+	}
+
+	public long getId() {
+		return id;
 	}
 	
 	

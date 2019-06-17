@@ -108,6 +108,21 @@ public class AdvertController {
 		aDao.update(advert);
 	}
 	
+	/*
+	 * Methods to make easier jUnit tests
+	 */
+	public long insertManually(long game_id, long advertiser_id, long platform_id, String description) {
+		GameDAO gDao = new GameDAO();
+		Game game = gDao.getById(game_id);
+		PlatformDAO pDao = new PlatformDAO();
+		Platform platform= pDao.getById(platform_id);
+		ClientDAO cDao = new ClientDAO();
+		Client client= cDao.getById(advertiser_id);
+		Advert advert = new Advert(game,client, description,platform);
+		aDao.save(advert);
+		return advert.getId();
+	}
+	
 	static public void deleteTestedAdvert(String description) {
 		AdvertDAO aDao = new AdvertDAO();
 		Advert advert = aDao.getByDescription(description);

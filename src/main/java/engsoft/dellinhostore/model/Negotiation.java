@@ -30,8 +30,8 @@ public class Negotiation extends Offer {
 	@Enumerated(EnumType.ORDINAL)
 	private TransactionStatus transactionStatus;
 
-	public Negotiation(Advert advert,Client offerer, String description) {
-		super(advert.getAdvertiser(), offerer, description);
+	public Negotiation(Advert advert,Client offerer, String offer) {
+		super(advert.getAdvertiser(), offerer, offer);
 		this.advert = advert;
 		this.transactionStatus = TransactionStatus.WAITING_ANSWER;
 	}

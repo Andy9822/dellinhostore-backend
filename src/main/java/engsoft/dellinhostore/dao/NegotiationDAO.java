@@ -93,4 +93,18 @@ public class NegotiationDAO {
 		}
 		session.close();
 	}
+	
+	@SuppressWarnings("unchecked")
+	public Negotiation getByDescription(String offer) {
+		Negotiation negotiation;
+		Session session = this.sessionFactory.openSession();
+		TypedQuery<Negotiation> query = session.createQuery("FROM Negotiation WHERE offer = :offer");
+		query.setParameter("offer", offer);
+		try {
+			negotiation  = query.getSingleResult();
+		} catch (Exception e) {
+			negotiation = null;
+		}
+		return negotiation;
+	}
 }

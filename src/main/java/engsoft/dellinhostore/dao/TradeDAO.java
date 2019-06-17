@@ -65,4 +65,18 @@ private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		session.close();
 		return tradeList;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public Trade getByDescription(String offer) {
+		Trade trade;
+		Session session = this.sessionFactory.openSession();
+		TypedQuery<Trade> query = session.createQuery("FROM Trade WHERE offer = :offer");
+		query.setParameter("offer", offer);
+		try {
+			trade  = query.getSingleResult();
+		} catch (Exception e) {
+			trade = null;
+		}
+		return trade;
+	}
 }
