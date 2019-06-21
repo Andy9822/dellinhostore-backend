@@ -58,7 +58,7 @@ public class TradeControllerTest {
     @Test
     public void insertTest() throws Exception {
     	long createdGenreId = gnrController.insertManually("Genre TradeController Test");
-    	long createdGameId = gController.insertManually("Genre TradeController Test", 18, createdGenreId);
+    	long createdGameId = gController.insertManually("Game TradeController Test", 18, createdGenreId);
     	long createdPlatformId = pController.insertManually("Platform TradeController Test","Company TradeController Test");
     	long createdAdvertiserId = cController.insertManually("Daenerys Johnson Test","894784","02/05/1996","TradeController@test.com","testpassword");
     	long createdOffererId = cController.insertManually("John Johnson Test","51482","02/05/1996","TradeController2@test.com","testpassword");
@@ -77,7 +77,7 @@ public class TradeControllerTest {
     @Test
     public void getAllTest() throws Exception {
     	long createdGenreId = gnrController.insertManually("Genre TradeController Test");
-    	long createdGameId = gController.insertManually("Genre TradeController Test", 18, createdGenreId);
+    	long createdGameId = gController.insertManually("Game TradeController Test", 18, createdGenreId);
     	long createdPlatformId = pController.insertManually("Platform TradeController Test","Company TradeController Test");
     	long createdAdvertiserId = cController.insertManually("Daenerys Johnson Test","894784","02/05/1996","TradeController@test.com","testpassword");
     	long createdOffererId = cController.insertManually("John Johnson Test","51482","02/05/1996","TradeController2@test.com","testpassword");
@@ -183,7 +183,7 @@ public class TradeControllerTest {
     	TradeController.deleteTestedTrade("Offer TradeController Test");
     	NegotiationController.deleteTestedNegotiation("Offer TradeController Test");
     	AdvertController.deleteTestedAdvert("Description TradeController Test");
-    	GameController.deleteTestedGame("Genre TradeController Test");
+    	GameController.deleteTestedGame("Game TradeController Test");
         GenreController.deleteTestedGenre("Genre TradeController Test");
         PlatformController.deleteTestedPlatform("Platform TradeController Test");
         ClientController.deleteTestedClient("TradeController@test.com");

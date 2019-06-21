@@ -32,6 +32,7 @@ public class TradeController {
 	public ReturnMessage insert(@RequestParam(value = "negotiation_id") long negotiation_id) {
 		if (validInsertParams(negotiation_id)) {
 			Trade trade = createTrade(negotiation_id);	
+			closeAdvertAndNegotiations(negotiation_id);
 			tDao.save(trade);
 			return new ReturnMessage(true, trade);
 		}
@@ -63,6 +64,15 @@ public class TradeController {
 		Rating rating = ratController.create();
 		Trade trade =  new Trade(advertiser, offerer, advertisedGame, negotiation.getOffer(), rating);
 		return trade;
+	}
+	
+	private void closeAdvertAndNegotiations(long negotiation_id) {
+		NegotiationDAO nDao = new NegotiationDAO();
+		Negotiation negotiation = nDao.getById(negotiation_id);
+		long advert_id = negotiation.getAdvert().getId();
+		nDao.closeNegotiationsByAdvertId(advert_id);
+		AdvertController adController = new AdvertController();
+		adController.closeById(advert_id);
 	}
 	
 	private boolean validInsertParams(long negotiation_id) {
