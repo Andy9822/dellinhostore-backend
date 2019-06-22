@@ -145,7 +145,7 @@ public class ClientController {
 	}
 
 	/*
-	 * Methods to make easier jUnit tests
+	 * Methods to make jUnit tests easier
 	 */
 	public long insertManually(String name, String cpf, String date, String email, String password) {
 		try {

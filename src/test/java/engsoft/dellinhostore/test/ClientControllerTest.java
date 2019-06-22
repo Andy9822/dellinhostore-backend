@@ -121,6 +121,24 @@ public class ClientControllerTest {
                 .andExpect(jsonPath("$.message[0].email").isString());
     }
     
+    @Test
+    public void loginTest() throws Exception {
+        this.mockMvc.perform(post("/client")
+        		.param("name", "John Wick Test")
+        		.param("cpf", "805080")
+        		.param("dateOfBirth", "02/05/1996")
+        		.param("email", "ClientControllerTest@email.com")
+        		.param("password", "testpassword"));
+        
+        this.mockMvc.perform(post("/client/login")
+        		.param("email", "ClientControllerTest@email.com")
+        		.param("password", "testpassword"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.success").value(true))
+                .andExpect(jsonPath("$.message.email").value("ClientControllerTest@email.com"))
+                .andExpect(jsonPath("$.admin").value(false));
+    }
+    
     @AfterEach
     public void deleteTestingClient() {
         ClientController.deleteTestedClient("ClientControllerTest@email.com");

@@ -17,6 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
+import engsoft.dellinhostore.controller.GameController;
 import engsoft.dellinhostore.controller.GenreController;
 
 @ExtendWith(SpringExtension.class)
@@ -71,10 +72,11 @@ public class GameControllerTest {
     
     @Test
     public void insertWithEmptyParameterTest() throws Exception {
+    	long createdGenreId = controller.insertManually("Genre GameController Test");
         this.mockMvc.perform(post("/game")
         		.param("name", "")
         		.param("minimumAge", "30")
-        		.param("genre_id", "2"))
+        		.param("genre_id", String.valueOf(createdGenreId)))
         		.andDo(print()).andExpect(status().isOk())
         		.andExpect(jsonPath("$.success").value(false))
         		.andExpect(jsonPath("$.message").value("Invalid id, invalid minimumAge value or empty string"));
@@ -90,10 +92,11 @@ public class GameControllerTest {
     
     @Test
     public void insertWithNegativeAgeTest() throws Exception {
+    	long createdGenreId = controller.insertManually("Genre GameController Test");
         this.mockMvc.perform(post("/game")
         		.param("name", "GameController Test")
         		.param("minimumAge", "-2")
-        		.param("genre_id", "2"))
+        		.param("genre_id", String.valueOf(createdGenreId)))
         		.andDo(print()).andExpect(status().isOk())
         		.andExpect(jsonPath("$.success").value(false))
         		.andExpect(jsonPath("$.message").value("Invalid id, invalid minimumAge value or empty string"));
@@ -101,10 +104,11 @@ public class GameControllerTest {
     
     @Test
     public void insertWithZeroAgeTest() throws Exception {
+    	long createdGenreId = controller.insertManually("Genre GameController Test");
         this.mockMvc.perform(post("/game")
         		.param("name", "GameController Test")
         		.param("minimumAge", "0")
-        		.param("genre_id", "2"))
+        		.param("genre_id", String.valueOf(createdGenreId)))
         		.andDo(print()).andExpect(status().isOk())
         		.andExpect(jsonPath("$.success").value(false))
         		.andExpect(jsonPath("$.message").value("Invalid id, invalid minimumAge value or empty string"));
@@ -113,7 +117,12 @@ public class GameControllerTest {
     
     @Test
     public void getAllTest() throws Exception {
-    	controller.insertManually("Genre GameController Test");
+    	long createdGenreId = controller.insertManually("Genre GameController Test");
+    	 this.mockMvc.perform(post("/game")
+         		.param("name", "GameController Test")
+         		.param("minimumAge", "18")
+         		.param("genre_id", String.valueOf(createdGenreId)))
+                 .andExpect(status().isOk());
         this.mockMvc.perform(get("/game"))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(jsonPath("$.message").isArray())
@@ -124,7 +133,8 @@ public class GameControllerTest {
     
     @AfterEach
     public void deleteTestedEntities() {
-        GenreController.deleteTestedGenre("GameController Test");
+        GameController.deleteTestedGame("GameController Test");
+        GenreController.deleteTestedGenre("Genre GameController Test");
     }
 }
 
