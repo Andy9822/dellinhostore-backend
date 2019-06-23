@@ -12,6 +12,6 @@ public class App {
     	System.out.println("DATABASE_CUSTOM_URL : " + System.getenv("DATABASE_CUSTOM_URL"));
     	System.out.println("DATABASE_USERNAME : " + System.getenv("DATABASE_USERNAME"));
     	System.out.println("DATABASE_PASSWORD : " + System.getenv("DATABASE_PASSWORD"));
-    	SpringApplication.run(App.class, args);   
+    	SpringApplication.run(App.class, args);
     }  
 }

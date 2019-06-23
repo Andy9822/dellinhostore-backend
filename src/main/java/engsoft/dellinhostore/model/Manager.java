@@ -15,8 +15,8 @@ public class Manager extends Client {
 	public Manager() {
 	}
 
-	public Manager(String name, String CPF,Date dateOfBirth, String email, String password,String jobTitle) {
-		super(name, CPF,dateOfBirth, email, password);
+	public Manager(String name, String CPF,Date dateOfBirth, String email, String password,String jobTitle, String phone) {
+		super(name, CPF,dateOfBirth, email, password, phone);
 		setJobTitle(jobTitle);	
 	}
 

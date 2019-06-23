@@ -35,19 +35,20 @@ public class ClientController {
 			@RequestParam(value = "cpf") String cpf,
 			@RequestParam(value = "dateOfBirth") String dateOfBirth ,
 			@RequestParam(value = "email") String email, 
-			@RequestParam(value = "password") String password) {
-		if (validParameters(name, cpf, email, password, dateOfBirth)) {
+			@RequestParam(value = "password") String password,
+			@RequestParam(value = "phone") String phone) {
+		if (validParameters(name, cpf, email, password, dateOfBirth,phone)) {
 			try {
 				SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 				Date date = formatter.parse(dateOfBirth);
-				Client client = new Client(name, cpf, date, email, password);
+				Client client = new Client(name, cpf, date, email, password, phone);
 				cDao.save(client);	
 				return new ReturnMessage(true,client);
 			} catch (ParseException e) {
 				return new ReturnMessage(false,"Invalid date format, doesn't match dd/MM/yyyy");
 			} 	
 		} else {
-			String errorMessage = getInvalidInfo(name, cpf, email, password, dateOfBirth);
+			String errorMessage = getInvalidInfo(name, cpf, email, password, dateOfBirth, phone);
 			return new ReturnMessage(false,errorMessage);
 		}
 	}
@@ -96,8 +97,8 @@ public class ClientController {
 	/*
 	 * Private methods
 	 */
-	private boolean validParameters(String name, String cpf, String email, String password, String dateOfBirth) {
-		if (validStrings(name, cpf, email, password) && availableEmail(email)) {
+	private boolean validParameters(String name, String cpf, String email, String password, String dateOfBirth, String phone) {
+		if (validStrings(name, cpf, email, password, phone) && availableEmail(email)) {
 			return true;
 		}
 		else {
@@ -115,19 +116,23 @@ public class ClientController {
 		}
 	}
 
-	private boolean validStrings(String name, String cpf, String email, String password) {
+	private boolean validStrings(String name, String cpf, String email, String password, String phone) {
 		return name != null && !name.trim().equals("")
 				&& cpf != null && !cpf.trim().equals("")
+				&& phone != null && !phone.trim().equals("")
 				&& email != null && !email.trim().equals("")
 				&& password != null && !password.trim().equals("");
 	}
 	
-	private String getInvalidInfo(String name, String cpf, String email, String password, String dateOfBirth) {
+	private String getInvalidInfo(String name, String cpf, String email, String password, String dateOfBirth, String phone) {
 		if (name == null || name.trim().equals("")) {
 			return "Empty name";
 		}
 		if (cpf == null || cpf.trim().equals("")) {
 			return "Empty cpf";
+		}
+		if (phone == null || phone.trim().equals("")) {
+			return "Empty phone";
 		}
 		if (email == null || email.trim().equals("")) {
 			return "Empty email";
@@ -147,11 +152,11 @@ public class ClientController {
 	/*
 	 * Methods to make jUnit tests easier
 	 */
-	public long insertManually(String name, String cpf, String date, String email, String password) {
+	public long insertManually(String name, String cpf, String date, String email, String password, String phone) {
 		try {
 			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 			Date dateOfBirth = formatter.parse(date);
-			Client client = new Client(name, cpf, dateOfBirth, email, password);
+			Client client = new Client(name, cpf, dateOfBirth, email, password, phone);
 			cDao.save(client);
 			return client.getId();
 		} catch (Exception e) {

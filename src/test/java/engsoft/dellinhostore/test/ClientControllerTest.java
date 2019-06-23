@@ -33,7 +33,8 @@ public class ClientControllerTest {
         		.param("cpf", "805080")
         		.param("dateOfBirth", "02/05/1996")
         		.param("email", "ClientControllerTest@email.com")
-        		.param("password", "testpassword"))
+        		.param("password", "testpassword")
+        		.param("phone", "99896353"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.success").value(true))
                 .andExpect(jsonPath("$.message.name").value("John Wick Test"))
@@ -51,6 +52,7 @@ public class ClientControllerTest {
         		.param("dateOfBirth", "12/08/1976")
         		.param("email", "ClientControllerTest@email.com")
         		.param("password", "testpassword")
+        		.param("phone", "99896353")
         		.param("foo", "foo"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.success").value(true))
@@ -67,6 +69,7 @@ public class ClientControllerTest {
         		.param("cpf", "")
         		.param("dateOfBirth", "30/12/1956")
         		.param("email", "ClientControllerTest@email.com")
+        		.param("phone", "99896353")
         		.param("password", "testpassword"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.success").value(false))
@@ -79,6 +82,7 @@ public class ClientControllerTest {
         		.param("name", "Daenerys")
         		.param("cpf", "84651482")
         		.param("dateOfBirth", "30/12/1956")
+        		.param("phone", "99896353")
         		.param("password", "testpassword"))
                 .andExpect(status().is4xxClientError());
     }
@@ -90,12 +94,14 @@ public class ClientControllerTest {
         		.param("cpf", "805080")
         		.param("dateOfBirth", "02/05/1996")
         		.param("email", "ClientControllerTest@email.com")
+        		.param("phone", "99896353")
         		.param("password", "testpassword"));
     	
         this.mockMvc.perform(post("/client")
         		.param("name", "MonaLisa")
         		.param("cpf", "4698/76")
         		.param("dateOfBirth", "24/02/1986")
+        		.param("phone", "99896353")
         		.param("email", "ClientControllerTest@email.com")
         		.param("password", "testpassword"))
                 .andExpect(status().isOk())
@@ -109,6 +115,7 @@ public class ClientControllerTest {
         		.param("name", "John Wick Test")
         		.param("cpf", "806580")
         		.param("dateOfBirth", "02/05/1996")
+        		.param("phone", "99896353")
         		.param("email", "ClientControllerTest@email.com")
         		.param("password", "testpassword"));
     	
@@ -127,6 +134,7 @@ public class ClientControllerTest {
         		.param("name", "John Wick Test")
         		.param("cpf", "805080")
         		.param("dateOfBirth", "02/05/1996")
+        		.param("phone", "99896353")
         		.param("email", "ClientControllerTest@email.com")
         		.param("password", "testpassword"));
         

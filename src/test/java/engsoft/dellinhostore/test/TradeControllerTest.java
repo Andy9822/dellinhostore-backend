@@ -60,8 +60,8 @@ public class TradeControllerTest {
     	long createdGenreId = gnrController.insertManually("Genre TradeController Test");
     	long createdGameId = gController.insertManually("Game TradeController Test", 18, createdGenreId);
     	long createdPlatformId = pController.insertManually("Platform TradeController Test","Company TradeController Test");
-    	long createdAdvertiserId = cController.insertManually("Daenerys Johnson Test","894784","02/05/1996","TradeController@test.com","testpassword");
-    	long createdOffererId = cController.insertManually("John Johnson Test","51482","02/05/1996","TradeController2@test.com","testpassword");
+    	long createdAdvertiserId = cController.insertManually("Daenerys Johnson Test","894784","02/05/1996","TradeController@test.com","testpassword", "1209389");
+    	long createdOffererId = cController.insertManually("John Johnson Test","51482","02/05/1996","TradeController2@test.com","testpassword", "102938");
     	long createdAvertId = adController.insertManually(createdGameId, createdAdvertiserId, createdPlatformId, "Description TradeController Test");
     	long createdNegotiationId = nController.insertManually(createdAvertId, createdOffererId, "Offer TradeController Test");
     	this.mockMvc.perform(post("/trade")
@@ -79,8 +79,8 @@ public class TradeControllerTest {
     	long createdGenreId = gnrController.insertManually("Genre TradeController Test");
     	long createdGameId = gController.insertManually("Game TradeController Test", 18, createdGenreId);
     	long createdPlatformId = pController.insertManually("Platform TradeController Test","Company TradeController Test");
-    	long createdAdvertiserId = cController.insertManually("Daenerys Johnson Test","894784","02/05/1996","TradeController@test.com","testpassword");
-    	long createdOffererId = cController.insertManually("John Johnson Test","51482","02/05/1996","TradeController2@test.com","testpassword");
+    	long createdAdvertiserId = cController.insertManually("Daenerys Johnson Test","894784","02/05/1996","TradeController@test.com","testpassword", "01212");
+    	long createdOffererId = cController.insertManually("John Johnson Test","51482","02/05/1996","TradeController2@test.com","testpassword", "109239");
     	long createdAvertId = adController.insertManually(createdGameId, createdAdvertiserId, createdPlatformId, "Description TradeController Test");
     	long createdNegotiationId = nController.insertManually(createdAvertId, createdOffererId, "Offer TradeController Test");
     	this.mockMvc.perform(post("/trade")

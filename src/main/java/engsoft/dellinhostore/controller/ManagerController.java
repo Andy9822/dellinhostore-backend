@@ -25,8 +25,9 @@ public class ManagerController {
 			@RequestParam(value = "dateOfBirth") @DateTimeFormat(pattern = "dd/MM/yyyy") Date dateOfBirth,
 			@RequestParam(value = "email") String email, 
 			@RequestParam(value = "password") String password,
-			@RequestParam(value = "jobTitle") String jobTitle) {
-		Manager manager = new Manager(name, CPF, dateOfBirth,email, password,jobTitle);
+			@RequestParam(value = "jobTitle") String jobTitle,
+			@RequestParam(value = "phone") String phone) {
+		Manager manager = new Manager(name, CPF, dateOfBirth,email, password,jobTitle, phone);
 		mDao.save(manager);
 		return manager;
 	}

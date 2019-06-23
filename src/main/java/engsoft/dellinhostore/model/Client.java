@@ -30,6 +30,9 @@ public class Client {
 	@Column (name = "cpf",unique = true)
 	private String cpf;
 	
+	@Column (name = "phone")
+	private String phone;
+	
 	@Column
 	@Temporal(TemporalType.DATE)
 	private Date dateOfBirth;
@@ -47,11 +50,12 @@ public class Client {
 	private String password;
 	
 	//Methods 
-	public Client(String name, String cpf, Date dateOfBirth, String email, String password) {
+	public Client(String name, String cpf, Date dateOfBirth, String email, String password,String phone) {
 		super();
 		this.name = name;
 		this.dateOfBirth = dateOfBirth;
 		this.cpf = cpf;
+		this.phone = phone;
 		this.email = email;
 		this.password = password;
 		this.rating = 0;
@@ -129,6 +133,10 @@ public class Client {
 	
 	public long getId() {
 		return id;
+	}
+
+	public String getPhone() {
+		return phone;
 	}
 
 }

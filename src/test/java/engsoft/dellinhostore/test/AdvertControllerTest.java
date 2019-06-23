@@ -52,7 +52,7 @@ public class AdvertControllerTest {
     	long createdGenreId = gnrController.insertManually("Genre AdvertController Test");
     	long createdGameId = gController.insertManually("Game AdvertController Test", 18, createdGenreId);
     	long createdPlatformId = pController.insertManually("Platform AdvertController Test","Company AdvertController Test");
-    	long createdClientId = cController.insertManually("John Wick Test","1565458","02/05/1996","AdvertController@test.com","testpassword");	
+    	long createdClientId = cController.insertManually("John Wick Test","1565458","02/05/1996","AdvertController@test.com","testpassword", "9999896353");	
     	this.mockMvc.perform(post("/advert")
         		.param("game_id", String.valueOf(createdGameId))
         		.param("advertiser_id", String.valueOf(createdClientId))
@@ -70,7 +70,7 @@ public class AdvertControllerTest {
     	long createdGenreId = gnrController.insertManually("Genre AdvertController Test");
     	long createdGameId = gController.insertManually("Game AdvertController Test", 18, createdGenreId);
     	long createdPlatformId = pController.insertManually("Platform AdvertController Test","Company AdvertController Test");
-    	long createdClientId = cController.insertManually("John Wick Test","1565458","02/05/1996","AdvertController@test.com","testpassword");	
+    	long createdClientId = cController.insertManually("John Wick Test","1565458","02/05/1996","AdvertController@test.com","testpassword","1823982");	
     	this.mockMvc.perform(post("/advert")
         		.param("game_id", String.valueOf(createdGameId))
         		.param("advertiser_id", String.valueOf(createdClientId))
@@ -88,7 +88,7 @@ public class AdvertControllerTest {
         long createdGenreId = gnrController.insertManually("Genre AdvertController Test");
     	long createdGameId = gController.insertManually("Game AdvertController Test", 18, createdGenreId);
     	long createdPlatformId = pController.insertManually("Platform AdvertController Test","Company AdvertController Test");
-    	long createdClientId = cController.insertManually("John Wick Test","1565458","02/05/1996","AdvertController@test.com","testpassword");	
+    	long createdClientId = cController.insertManually("John Wick Test","1565458","02/05/1996","AdvertController@test.com","testpassword", "90912830");	
     	this.mockMvc.perform(post("/advert")
         		.param("game_id", String.valueOf(createdGameId))
         		.param("advertiser_id", String.valueOf(createdClientId))
@@ -105,7 +105,7 @@ public class AdvertControllerTest {
         long createdGenreId = gnrController.insertManually("Genre AdvertController Test");
     	long createdGameId = gController.insertManually("Game AdvertController Test", 18, createdGenreId);
     	pController.insertManually("Platform AdvertController Test","Company AdvertController Test");
-    	long createdClientId = cController.insertManually("John Wick Test","1565458","02/05/1996","AdvertController@test.com","testpassword");	
+    	long createdClientId = cController.insertManually("John Wick Test","1565458","02/05/1996","AdvertController@test.com","testpassword", "0192830");	
     	this.mockMvc.perform(post("/advert")
         		.param("game_id", String.valueOf(createdGameId))
         		.param("advertiser_id", String.valueOf(createdClientId))
@@ -119,7 +119,7 @@ public class AdvertControllerTest {
         long createdGenreId = gnrController.insertManually("Genre AdvertController Test");
     	long createdGameId = gController.insertManually("Game AdvertController Test", 18, createdGenreId);
     	pController.insertManually("Platform AdvertController Test","Company AdvertController Test");
-    	long createdClientId = cController.insertManually("John Wick Test","1565458","02/05/1996","AdvertController@test.com","testpassword");	
+    	long createdClientId = cController.insertManually("John Wick Test","1565458","02/05/1996","AdvertController@test.com","testpassword", "10930");	
     	this.mockMvc.perform(post("/advert")
         		.param("game_id", String.valueOf(createdGameId))
         		.param("advertiser_id", String.valueOf(createdClientId))
@@ -132,7 +132,7 @@ public class AdvertControllerTest {
     	long createdGenreId = gnrController.insertManually("Genre AdvertController Test");
     	long createdGameId = gController.insertManually("Game AdvertController Test", 18, createdGenreId);
     	long createdPlatformId = pController.insertManually("Platform AdvertController Test","Company AdvertController Test");
-    	long createdClientId = cController.insertManually("John Wick Test","1565458","02/05/1996","AdvertController@test.com","testpassword");	
+    	long createdClientId = cController.insertManually("John Wick Test","1565458","02/05/1996","AdvertController@test.com","testpassword", "09123809");	
     	this.mockMvc.perform(post("/advert")
         		.param("game_id", String.valueOf(createdGameId))
         		.param("advertiser_id", String.valueOf(createdClientId))
@@ -149,7 +149,7 @@ public class AdvertControllerTest {
     	long createdGenreId = gnrController.insertManually("Genre AdvertController Test");
     	long createdGameId = gController.insertManually("Game AdvertController Test", 18, createdGenreId);
     	long createdPlatformId = pController.insertManually("Platform AdvertController Test","Company AdvertController Test");
-    	long createdClientId = cController.insertManually("John Wick Test","1565458","02/05/1996","AdvertController@test.com","testpassword");	
+    	long createdClientId = cController.insertManually("John Wick Test","1565458","02/05/1996","AdvertController@test.com","testpassword", "12830");	
     	this.mockMvc.perform(post("/advert")
         		.param("game_id", String.valueOf(createdGameId))
         		.param("advertiser_id", String.valueOf(createdClientId))
