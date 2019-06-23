@@ -51,12 +51,12 @@ public class PlatformControllerTest {
     @Test
     public void insertWithAdditionalParametersTest() throws Exception {
         this.mockMvc.perform(post("/platform")
-        		.param("name", "PlatformController")
+        		.param("name", "PlatformController Test")
         		.param("company", "Company Test")
         		.param("foo", "foo"))
         		.andExpect(status().isOk())
         		.andExpect(jsonPath("$.success").value(true))
-                .andExpect(jsonPath("$.message.name").value("PlatformController"))
+                .andExpect(jsonPath("$.message.name").value("PlatformController Test"))
                 .andExpect(jsonPath("$.message.company").value("Company Test"));
     }
     
@@ -100,7 +100,7 @@ public class PlatformControllerTest {
     
     @AfterEach 
     public void deleteTestedEntities() {
-    	PlatformController.deleteTestedPlatform("Platform AdvertController Test");
+    	PlatformController.deleteTestedPlatform("PlatformController Test");
     }
 
 }
